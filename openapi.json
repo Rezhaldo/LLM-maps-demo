@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LLM Maps API",
+    "version": "1.0.0",
+    "description": "Google Maps search and directions API for LLMs"
+  },
+  "paths": {
+    "/api/maps/search": {
+      "get": {
+        "operationId": "searchPlaces",
+        "summary": "Search for places using a query",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Natural language query like 'Find ramen in Jakarta'"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Jakarta"
+            },
+            "description": "Optional location context"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 5000
+            },
+            "description": "Optional search radius in meters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results from Google Maps",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/directions": {
+      "get": {
+        "operationId": "getDirections",
+        "summary": "Get directions between two places",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Starting location (e.g., 'Central Jakarta')"
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Destination location (e.g., 'Sudirman')"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Google Maps directions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
