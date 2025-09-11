@@ -14,6 +14,14 @@ export const searchPlaces = async (query, location = "Jakarta", radius = 5000) =
         let googleMapsLink = null;
 
         if (response.data.results?.length > 0) {
+            const places = response.data.results.slice(0, 1).map(place => ({
+                name: place.name,
+                address: place.formatted_address,
+                rating: place.rating,
+                totalReviews: place.user_ratings_total,
+                googleMapsLink: `https://www.google.com/maps/place/?q=place_id:${place.place_id}`
+            }));
+
             const first = response.data.results[0];
             const loc = first.geometry.location;
 
@@ -21,16 +29,16 @@ export const searchPlaces = async (query, location = "Jakarta", radius = 5000) =
             googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`;
 
             return {
-                results: response.data.results || [],
                 embedLink,
                 googleMapsLink,
+                places
             };
         }
 
 
     } catch (err) {
         console.error("searchPlaces error:", err.message);
-        return { results: [], embedLink: null, googleMapsLink: null };
+        return { embedLink: null, googleMapsLink: null };
     }
 };
 
@@ -56,12 +64,11 @@ export const getDirections = async (origin, destination) => {
         }
 
         return {
-            results: response.data.routes || [],
             embedLink,
             googleMapsLink,
         };
     } catch (err) {
         console.error("getDirections error:", err.message);
-        return { results: [], embedLink: null, googleMapsLink: null };
+        return { embedLink: null, googleMapsLink: null };
     }
 };
