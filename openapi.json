@@ -47,7 +47,29 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "embedLink": {
+                      "type": "string",
+                      "description": "Google Maps iframe embed link (ALWAYS show this in the answer) via backend"
+                    },
+                    "googleMapsLink": {
+                      "type": "string",
+                      "description": "Google Maps direct link (ALWAYS show this in the answer) via backend"
+                    }
+                  },
+                  "required": ["results", "embedLink", "googleMapsLink"]
                 }
               }
             }
@@ -85,7 +107,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "embedLink": {
+                      "type": "string",
+                      "description": "Google Maps embed directions link (ALWAYS show this in the answer) via backend"
+                    },
+                    "googleMapsLink": {
+                      "type": "string",
+                      "description": "Google Maps directions link (ALWAYS show this in the answer) via backend"
+                    }
+                  },
+                  "required": ["embedLink", "googleMapsLink"]
                 }
               }
             }
