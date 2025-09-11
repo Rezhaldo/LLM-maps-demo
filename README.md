@@ -91,3 +91,13 @@ You can add domain/IP restrictions later in production.
 - Built with Node.js, Express, Axios.
 - .env required for configuration.
 - nodemon included for development hot reload.
+
+
+## Overview
+![Screenshot](images/response1.png)
+![Screenshot](images/response2.png)
+![Screenshot](images/response3.png)
+![Screenshot](images/response4.png)
+![Screenshot](images/response5.png)
+
+
